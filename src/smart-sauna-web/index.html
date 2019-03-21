@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Умная баня</title>
+	<style>
+		body {}
+		h1   {color: white;}
+		h2   {color: white;}
+		p    {color: white;}
+		.panel
+		{
+			margin: auto;
+			width: 100%;
+			padding: 30px;
+			background-color: #01579B;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="panel">
+		<h1>Температура</h1>
+		<h2 id="temp">--</h2>
+	</div>
+</body>
+
+<script type="text/javascript">
+
+function send()
+{
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+        if (this.readyState == 4) 
+        {
+        	if (this.status == 200)
+        	{
+        		document.getElementById("temp").innerHTML = this.responseText;
+        	}
+        	else
+        	{
+        		document.getElementById("temp").innerHTML = "--";
+        	}
+       	}
+    };
+    xhr.open('GET', 'data.lua', false);
+	xhr.send();
+}
+setInterval(send, 2000);
+
+</script>
+</html>
